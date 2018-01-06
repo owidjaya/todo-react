@@ -61,7 +61,7 @@ class TodoApp extends Component {
   render() {
     return (
       <div>
-        <h1>Todo List (ReactJS)</h1>
+        <h1>{this.props.title + " (ReactJS)" }</h1>
         <TodoAdder addTodoHandler={this.addTodoHandler} />
         <TodoList deleteHandler={this.deleteTodoHandler} todoList={this.state.todoList} />
       </div>
