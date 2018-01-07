@@ -29,11 +29,26 @@ class TodoList extends Component {
   render() { 
     const todoList = this.props.todoList.map((todo, index) => { 
       return <div key={"TODO" + index}>{todo.task} 
-            <button onClick={(index) => this.props.deleteHandler(index)}><i className="fa fa-minus" /></button></div>
+            <button onClick={(event) => this.props.deleteHandler(index)}><i className="fa fa-minus" /></button></div>
     })
     return (
 	    <div id="todoList">{todoList}</div>
     )
+  }
+}
+class TodoFilter extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      filterValue: ""
+    }
+    this.onChangeHandler = this.onChangeHandler.bind(this)
+  }
+  onChangeHandler(event) {
+    this.setState({filterValue: event.target.value})
+  }
+  render() {
+    return <div><input value={this.state.filterValue} onChange={this.onChangeHandler}/><button onClick={() => {this.props.filterHandler(this.state.filterValue)}}><i className='fa fa-search'></i></button></div>
   }
 }
 
@@ -41,29 +56,38 @@ class TodoApp extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      todoList : props.todoList ? props.todoList : [] 
+      todoList : props.todoList ? props.todoList : [],
+      filteredList: props.todoList ? props.todoList : [] 
     }
     this.addTodoHandler = this.addTodoHandler.bind(this)
     this.deleteTodoHandler = this.deleteTodoHandler.bind(this)
+    this.filterHandler = this.filterHandler.bind(this)
   }
 
   addTodoHandler(newTodo) { 
     const todoList = [...this.state.todoList ]
     todoList.push({task: newTodo})
-    this.setState({todoList: todoList})
-
+    this.setState({todoList: todoList , filteredList: todoList})
   }
   deleteTodoHandler(index) {
     const todoList = Object.assign([], this.state.todoList)
     todoList.splice(index,1);
-    this.setState({ todoList: todoList})
+    this.setState({ todoList: todoList, filteredList: todoList})
+    
+  }
+  filterHandler(filter) {
+    const filteredList = this.state.todoList.filter((todo) => {
+      return todo.task.search(filter) > -1 ? true: false
+    })
+    this.setState({filter: filter, filteredList:filteredList})
   }
   render() {
     return (
       <div>
         <h1>{this.props.title + " (ReactJS)" }</h1>
         <TodoAdder addTodoHandler={this.addTodoHandler} />
-        <TodoList deleteHandler={this.deleteTodoHandler} todoList={this.state.todoList} />
+        <TodoFilter filterHandler={this.filterHandler}/>
+        <TodoList deleteHandler={this.deleteTodoHandler} todoList={this.state.filteredList} />
       </div>
     );
   }
