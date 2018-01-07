@@ -7,24 +7,24 @@ import registerServiceWorker from './registerServiceWorker';
 
 const data = [
     {
-        title: "Title 1",
+        title: "Home Task",
         todos: [
-            {task: "task 1"},
-            {task: "task 2"},
-            {task: "task 3"},
-            {task: "task 4"},
-            {task: "task 5"} 
+            {task: "Paint wall"},
+            {task: "Fix plumbing"},
+            {task: "Clean Garage"},
+            {task: "Water Garden"},
+            {task: "Rake Leaves"} 
         ]
 
     },
     {
-        title: "Title 2",
+        title: "Work Todos",
         todos: [
-            {task: "task 1"},
-            {task: "task 2"},
-            {task: "task 3"},
-            {task: "task 4"},
-            {task: "task 5"} 
+            {task: "Create Presentation"},
+            {task: "Finish Story 1234"},
+            {task: "Meeting with Team"},
+            {task: "Implement bug fix"},
+            {task: "Documentation for new feature"} 
         ]
     }
 ]

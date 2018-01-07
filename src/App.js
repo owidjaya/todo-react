@@ -19,7 +19,7 @@ class TodoAdder extends Component {
   render() { 
     return (
         <div className='pure-g'>
-          <input type='text' id='todo' placeholder="put in todo here" value={this.state.todoValue} onChange={this.onChangeHandler}/>
+          <input type='text' id='todo' placeholder="New Todo..." value={this.state.todoValue} onChange={this.onChangeHandler}/>
           <button className='btn btn-default' onClick={this.onClickHandler}><i className="fa fa-plus"></i></button>
         </div>
     )
@@ -48,7 +48,7 @@ class TodoFilter extends Component {
     this.setState({filterValue: event.target.value})
   }
   render() {
-    return <div><input value={this.state.filterValue} onChange={this.onChangeHandler}/><button onClick={() => {this.props.filterHandler(this.state.filterValue)}}><i className='fa fa-search'></i></button></div>
+    return <div><input placeholder="Filter..." value={this.state.filterValue} onChange={this.onChangeHandler}/><button onClick={() => {this.props.filterHandler(this.state.filterValue)}}><i className='fa fa-search'></i></button></div>
   }
 }
 
