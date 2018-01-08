@@ -29,7 +29,7 @@ class TodoList extends Component {
   render() { 
     const todoList = this.props.todoList.map((todo, index) => { 
       return <div key={"TODO" + index}>{todo.task} 
-            <button onClick={(event) => this.props.deleteHandler(index)}><i className="fa fa-minus" /></button></div>
+            <button onClick={(event) => this.props.deleteHandler(todo.task)}><i className="fa fa-minus" /></button></div>
     })
     return (
 	    <div id="todoList">{todoList}</div>
@@ -69,9 +69,11 @@ class TodoApp extends Component {
     todoList.push({task: newTodo})
     this.setState({todoList: todoList , filteredList: todoList})
   }
-  deleteTodoHandler(index) {
-    const todoList = Object.assign([], this.state.todoList)
-    todoList.splice(index,1);
+  deleteTodoHandler(task) {
+    let todoList = Object.assign([], this.state.todoList)
+    todoList = todoList.filter((todo) => {
+      return todo.task != task 
+    })
     this.setState({ todoList: todoList, filteredList: todoList})
     
   }
